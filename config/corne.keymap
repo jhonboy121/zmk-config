@@ -15,6 +15,18 @@
 };
 
 / {
+    combos {
+        compatible = "zmk,combos";
+        combo_esc {
+			require-prior-idle-ms = <1000>;
+            timeout-ms = <50>;
+            key-positions = <31 34>;
+            bindings = <&mo 3>;
+        };
+    };
+};
+
+/ {
         keymap {
                 compatible = "zmk,keymap";
 
@@ -35,13 +47,13 @@
 // ----------------------------------------------------------------------
 // |  1  |  2   |  3   |  4  |  5   |   |  6  |  7  |  8   |  9   |  0  |
 // | TAB | CTRL | SHFT | ESC | CAPS |   | GUI | SPC | SHFT | CTRL |  :  |
-// | BT1 | BT2  | BT3  | BT4 | BT5  |   | LFT | DWN |  UP  | RGT  |  ?  |
+// |     |      |      |     |      |   | LFT | DWN |  UP  | RGT  |  ?  |
 //              |      |     |      |   | ENT |     | ALT  |
                         bindings = <
-   &kp N1       &kp N2       &kp N3       &kp N4       &kp N5       &kp N6   &kp N7    &kp N8    &kp N9    &kp N0
-   &kp TAB      &kp LCTRL    &kp LSHFT    &kp ESC      &kp CLCK     &kp RGUI &kp SPACE &kp RSHFT &kp RCTRL &kp COLON
-   &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &kp QMARK
-                             &trans       &trans       &trans       &kp RET  &trans    &kp RALT
+   &kp N1  &kp N2    &kp N3    &kp N4  &kp N5   &kp N6   &kp N7    &kp N8    &kp N9    &kp N0
+   &kp TAB &kp LCTRL &kp LSHFT &kp ESC &kp CLCK &kp RGUI &kp SPACE &kp RSHFT &kp RCTRL &kp COLON
+   &trans  &trans    &trans    &trans  &trans   &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &kp QMARK
+                     &trans    &trans  &trans   &kp RET  &trans    &kp RALT
                         >;
                 };
 
@@ -56,6 +68,20 @@
    &trans   &kp GRAVE &kp LT   &kp GT    &kp TILDE   &kp MINUS &kp PLUS  &kp BSLH  &kp LBKT &kp RBKT
    &trans   &kp SQT   &kp DQT  &trans    &trans      &kp UNDER &kp EQUAL &kp PIPE  &kp LBRC &kp RBRC
                       &kp LGUI &trans    &kp SPACE   &kp RET   &trans    &kp RALT
+                        >;
+                };
+
+                command_layer {
+// -------------------------------------------------------------------
+// | BT1 | BT2 | BT3 | BT4 | BT5 |   | CLR | CLRA |     |     |     |
+// | D1  | D2  | D3  | D4  | D5  |   |     |      |     |     |     |
+// |     |     |     |     |     |   |     |      |     |     |     |
+//             |     |     |     |   |     |      |     |
+                        bindings = <
+   &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &bt BT_CLR &bt BT_CLR_ALL &trans &trans &trans
+   &bt BT_DISC 0 &bt BT_DISC 1 &bt BT_DISC 2 &bt BT_DISC 3 &bt BT_DISC 4 &trans     &trans         &trans &trans &trans
+   &trans        &trans        &trans        &trans        &trans        &trans     &trans         &trans &trans &trans
+                               &trans        &trans        &trans        &trans     &trans         &trans
                         >;
                 };
         };
